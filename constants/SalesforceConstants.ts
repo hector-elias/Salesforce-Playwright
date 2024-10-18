@@ -1,16 +1,9 @@
-export const NavbarMenu = {
+export const ServiceNavbarMenu = {
     Home: 'Home',
-    Opportunities: 'Opportunities',
-    Leads: 'Leads',
-    Tasks: 'Tasks',
-    Files: 'Files',
+    Chatter: 'Chatter',
     Accounts: 'Accounts',
     Contacts: 'Contacts',
-    Campaigns: 'Campaigns',
-    Dashboard: 'Dashboard',
+    Cases: 'Cases',
     Reports: 'Reports',
-    Chatter: 'Chatter',
-    Groups: 'Groups',
-    Calendar: 'Calendar',
-    More: 'More'
+    Dashboards: 'Dashboards'
 };
