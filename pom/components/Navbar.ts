@@ -26,7 +26,7 @@ export class Navbar {
         this.casesTab = this.getTabLocator(ServiceNavbarMenu.Cases);
         this.reportsTab = this.getTabLocator(ServiceNavbarMenu.Reports);
         this.dashboardsTab = this.getTabLocator(ServiceNavbarMenu.Dashboards);
-        this.launcherIcon = page.locator(`button[title='App Launcher']`);
+        this.launcherIcon = page.getByRole('button', { name: 'App Launcher' });
     }
 
     // Helper to get the Locator of a specific tab based on its title.
@@ -40,9 +40,20 @@ export class Navbar {
     }
 
     // Generic method to click on 'App Launcher' icon.
-    async openAppLauncher(): Promise<void> {
-        await this.elementActions.clickElement(this.launcherIcon);
+    async openAppLauncher(retryInterval: number = 500, maxAttempts: number = 10): Promise<void> {
+        for (let attempt = 0; attempt < maxAttempts; attempt++) {
+            if (await this.launcherIcon.isVisible()) {
+                await this.elementActions.clickElement(this.launcherIcon);
+                return; 
+            }
+    
+            // Esperar brevemente antes de volver a intentar
+            await new Promise(resolve => setTimeout(resolve, retryInterval));
+        }
+    
+        throw new Error(`Failed to click on "App Launcher" icon after ${maxAttempts} attempts.`);
     }
+    
 
     // Generic method to click on a navigation menu item.
     async clickMenuItem(menuObject: Record<string, string>, tabName: keyof typeof menuObject): Promise<void> {

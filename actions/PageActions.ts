@@ -2,27 +2,21 @@ import { type Page } from '@playwright/test';
 
 export class PageActions {
 
-    // Espera hasta que el evento 'load' se haya disparado (página completamente cargada)
-    async waitForPageLoad(page: Page, timeout: number = 30000): Promise<void> {
-        console.log('Waiting for page to fully load...');
+    // Waits until the 'load' event is fired (page is fully loaded).
+    async waitForPageLoad(page: Page, timeout?: number): Promise<void> {
+        console.log(`Waiting for page to fully load with timeout: ${timeout || 'default (30s)'}`);
         await page.waitForLoadState('load', { timeout });
     }
 
-    // Espera hasta que el evento 'domcontentloaded' se haya disparado (HTML inicial completamente cargado)
-    async waitForDOMContentLoaded(page: Page, timeout: number = 30000): Promise<void> {
-        console.log('Waiting for DOM content to be fully loaded...');
+    // Waits until the 'domcontentloaded' event is fired (initial HTML is fully loaded).
+    async waitForDOMContentLoaded(page: Page, timeout?: number): Promise<void> {
+        console.log(`Waiting for DOM content to fully load with timeout: ${timeout || 'default (30s)'}`);
         await page.waitForLoadState('domcontentloaded', { timeout });
     }
 
-    // Espera hasta que no haya actividad de red por un tiempo (útil para esperar contenido dinámico)
-    async waitForNetworkIdle(page: Page, timeout: number = 30000): Promise<void> {
-        console.log('Waiting for network to be idle...');
+    // Waits until there is no network activity for a while (useful for waiting on dynamic content).
+    async waitForNetworkIdle(page: Page, timeout?: number): Promise<void> {
+        console.log(`Waiting for network to be idle with timeout: ${timeout || 'default (30s)'}`);
         await page.waitForLoadState('networkidle', { timeout });
-    }
-
-    // Espera hasta que los recursos principales hayan sido cargados (imágenes, scripts, etc.)
-    async waitForPageToBecomeInteractive(page: Page, timeout: number = 30000): Promise<void> {
-        console.log('Waiting for page to become interactive...');
-        await page.waitForLoadState('domcontentloaded', { timeout });
     }
 }
