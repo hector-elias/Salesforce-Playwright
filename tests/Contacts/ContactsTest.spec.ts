@@ -27,7 +27,7 @@ test.use({
 test.describe('Contacts Feature', () => {
 
     test.beforeEach(async ({ page }) => {
-        // Initialize ElementActions and BrowserActions.
+        // Initialize ElementActions, BrowserActions and PageActions.
         elementActions = new ElementActions();
         browserActions = new BrowserActions();
         pageActions = new PageActions();
